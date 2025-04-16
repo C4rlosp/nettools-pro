@@ -28,3 +28,4 @@ alias crixtools='docker run --rm -it --cap-add=NET_RAW --cap-add=NET_ADMIN ghcr.
 ```bash
 docker build -t nettools-pro .
 ```
+trigger workflow run
