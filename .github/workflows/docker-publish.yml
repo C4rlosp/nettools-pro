@@ -23,3 +23,29 @@ jobs:
 
       - name: Push Docker image
         run: docker push ghcr.io/c4rlosp/nettools-pro:latest
+
+name: Publish Docker image to GHCR
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Log in to GitHub Container Registry
+        run: echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u C4rlosp --password-stdin
+
+      - name: Build Docker image
+        run: docker build -t ghcr.io/c4rlosp/nettools-pro:latest .
+
+      - name: Push Docker image
+        run: docker push ghcr.io/c4rlosp/nettools-pro:latest
